@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DeliveryTestTask</string>
+    <string name="latest_delivery_address">Latest delivery address</string>
+    <string name="new_order">New order</string>
+</resources>
