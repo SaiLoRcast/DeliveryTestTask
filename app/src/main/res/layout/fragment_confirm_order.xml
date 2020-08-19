@@ -6,9 +6,10 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:background="@drawable/toolbar_background"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_background"
         android:orientation="horizontal">
 
         <ImageView
@@ -32,31 +33,105 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_white">
+
+        <TextView
+            android:id="@+id/confirm_delivery_from_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="21dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/confirm_delivery_from_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="21dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:src="@drawable/ic_arrow_down"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/confirm_delivery_to_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="21dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/confirm_delivery_to_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="21dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/delivery_final_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/cancel"
-            android:layout_weight="1"
-            android:background="@drawable/background_white"
-            android:textColor="@color/textColor"
             android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:layout_margin="16dp"
-            android:text="Отмена" />
+            android:layout_weight="1"
+            android:background="@drawable/background_white"
+            android:text="Отмена"
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/next"
-            android:layout_weight="1"
-            android:background="@drawable/next_button"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:layout_margin="16dp"
-            android:text="Далее" />
+            android:layout_weight="1"
+            android:background="@drawable/next_button"
+            android:text="Далее"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
