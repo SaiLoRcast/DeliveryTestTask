@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +16,6 @@ import com.ethanhua.skeleton.ViewSkeletonScreen
 import com.example.core.domain.User
 import com.example.deliverytesttask.R
 import com.example.deliverytesttask.framework.ViewModelFactory
-import com.example.mvvmtesttask.view.ui.fragments.main_fragment.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.deliverytesttask.ui.create_order_fragment
+package com.example.deliverytesttask.ui.confirm_order_fragment
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -11,17 +11,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class CreateNewOrderFragmentViewModel(application: Application, interactors: Interactors) :
+class ConfirmOrderFragmentViewModel(application: Application, interactors: Interactors) :
     BaseViewModel(application, interactors) {
 
-    val usersList = MutableLiveData<UsersData>()
+//    val usersList = MutableLiveData<UsersData>()
 
-    fun loadUsersList() {
-        viewModelScope.launch {
-            withContext(Dispatchers.Default){
-                usersList.postValue(interactors.getUsersList())
-            }
-        }
-    }
+//    fun loadUsersList() {
+//        viewModelScope.launch {
+//            withContext(Dispatchers.Default){
+//                usersList.postValue(interactors.getUsersList())
+//            }
+//        }
+//    }
 }
 

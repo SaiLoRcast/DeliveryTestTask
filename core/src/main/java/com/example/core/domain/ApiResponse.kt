@@ -25,3 +25,7 @@ data class Location(
     val timezone: String
 
 )
+
+data class UsersData(
+    val data: List<User>
+)
