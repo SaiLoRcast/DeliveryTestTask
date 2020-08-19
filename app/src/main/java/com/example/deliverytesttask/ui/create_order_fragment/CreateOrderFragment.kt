@@ -5,15 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.ViewSkeletonScreen
+import com.example.core.domain.UsersData
 import com.example.deliverytesttask.R
 import com.example.deliverytesttask.framework.ViewModelFactory
 import com.example.deliverytesttask.presentation.mainscreen.PackageWeightsAdapter
-import kotlinx.android.synthetic.main.fragment_create_oeder.*
+import kotlinx.android.synthetic.main.fragment_create_order.*
 
 class CreateOrderFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
@@ -26,10 +28,10 @@ class CreateOrderFragment : Fragment() {
     ): View? {
 
         skeletonScreen = Skeleton.bind(container)
-            .load(R.layout.fragment_create_oeder)
+            .load(R.layout.fragment_create_order)
             .show()
 
-        return inflater.inflate(R.layout.fragment_create_oeder, container, false)
+        return inflater.inflate(R.layout.fragment_create_order, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,12 +67,12 @@ class CreateOrderFragment : Fragment() {
         val model: CreateNewOrderFragmentViewModel =
             ViewModelProvider(this, ViewModelFactory).get(CreateNewOrderFragmentViewModel::class.java)
 
-//        model.loadUserInfo()
+        model.loadUsersList()
 
-//        model.userInfo.observe(viewLifecycleOwner,
-//            Observer<User> {
-//
-//            })
+        model.usersList.observe(viewLifecycleOwner,
+            Observer<UsersData> {
+
+            })
 
     }
 

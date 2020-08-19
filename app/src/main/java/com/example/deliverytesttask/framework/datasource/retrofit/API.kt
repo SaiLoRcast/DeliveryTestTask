@@ -1,6 +1,7 @@
 package com.example.deliverytesttask.framework.datasource.retrofit
 
 import com.example.core.domain.User
+import com.example.core.domain.UsersData
 import com.example.deliverytesttask.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +15,9 @@ interface API {
 
     @GET("/data/api/user/{userId}")
     fun getUserInfo(@Header("app-id") appId:String , @Path("userId") userId: String): Call<User>
+
+    @GET("/data/api/user")
+    fun getUsersList(@Header("app-id") appId: String): Call<UsersData>
 
     companion object {
         fun getAPI(): API {

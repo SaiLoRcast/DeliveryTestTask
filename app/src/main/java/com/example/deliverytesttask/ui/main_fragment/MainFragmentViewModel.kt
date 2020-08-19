@@ -1,11 +1,6 @@
-package com.example.mvvmtesttask.view.ui.fragments.main_fragment
+package com.example.deliverytesttask.ui.main_fragment
 
-//import com.example.mvvmtesttask.model.CardholdersResponse
-//import com.example.mvvmtesttask.model.ExchangeRatesRepository
-//import com.example.mvvmtesttask.model.ExchangeRatesResponse
-//import com.example.mvvmtesttask.utils.ErrorHandler
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.User
