@@ -11,5 +11,5 @@ interface OrdersDAO {
     fun insertOrders(orders: List<OrderEntity>)
 
     @Query("SELECT * FROM orderentity")
-    fun getFilms() : List<OrderEntity>
+    fun getMyOrders() : List<OrderEntity>
 }

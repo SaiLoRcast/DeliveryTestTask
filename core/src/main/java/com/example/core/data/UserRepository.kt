@@ -1,5 +1,6 @@
 package com.example.core.data
 
+import com.example.core.domain.Order
 import com.example.core.domain.User
 import com.example.core.domain.UsersData
 
@@ -10,6 +11,7 @@ class UserRepository(
     private lateinit var userInfo: User
     private lateinit var userLocation: User
     private lateinit var usersList: UsersData
+    private var myOrdersList = listOf<Order>()
 
     private suspend fun loadUserInfo() {
         if (webDataSource != null) {
@@ -29,6 +31,12 @@ class UserRepository(
         }
     }
 
+    private suspend fun loadMyOrdersList() {
+        if (myOrdersList.isEmpty()) {
+            myOrdersList = localDataSource.getMyOrders()
+        }
+    }
+
     suspend fun getUserInfo(): User {
         loadUserInfo()
         return userInfo
@@ -42,6 +50,11 @@ class UserRepository(
     suspend fun getUsersList(): UsersData {
         loadUsersList()
         return usersList
+    }
+
+    suspend fun getMyOrders(): List<Order> {
+        loadMyOrdersList()
+        return myOrdersList
     }
 
 }

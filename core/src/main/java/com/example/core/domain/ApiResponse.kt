@@ -29,3 +29,12 @@ data class Location(
 data class UsersData(
     val data: List<User>
 )
+
+data class Order(
+    val id: Int,
+    val locationFrom: String,
+    val dateFrom: String,
+    val locationTo: String,
+    val dateTo: String,
+    val cost: String
+)

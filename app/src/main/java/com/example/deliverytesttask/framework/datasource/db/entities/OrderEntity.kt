@@ -6,14 +6,11 @@ import com.example.core.domain.Location
 
 @Entity
 data class OrderEntity(
-    @PrimaryKey val id: String,
-    val title: String,
-    val firstName: String,
-    val lastName: String,
-    val gender: String,
-    val email: String,
-    val dateOfBirth: String,
-    val registerDate: String,
-    val phone: String,
-    val picture: String
+    @PrimaryKey
+    val id: Int,
+    val locationFrom: String,
+    val dateFrom: String,
+    val locationTo: String,
+    val dateTo: String,
+    val cost: String
 )
