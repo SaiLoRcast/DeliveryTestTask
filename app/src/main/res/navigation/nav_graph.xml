@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/mainFragment">
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.deliverytesttask.ui.main_fragment.MainFragment"
@@ -12,6 +13,7 @@
             android:id="@+id/action_mainFragment_to_createOrderFragment"
             app:destination="@id/createOrderFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/createOrderFragment"
         android:name="com.example.deliverytesttask.ui.create_order_fragment.CreateOrderFragment"
@@ -19,5 +21,17 @@
         <action
             android:id="@+id/action_createOrder_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_createOrder_to_confirmOrderFragment"
+            app:destination="@id/confirmOrderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirmOrderFragment"
+        android:name="com.example.deliverytesttask.ui.confirm_order_fragment.ConfirmOrderFragment"
+        tools:layout="@layout/fragment_confirm_order">
+        <action
+            android:id="@+id/action_confirmOrder_to_createOrderFragment"
+            app:destination="@id/createOrderFragment" />
     </fragment>
 </navigation>

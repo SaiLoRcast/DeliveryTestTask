@@ -1,14 +1,17 @@
-package com.example.deliverytesttask.presentation.mainscreen
+package com.example.deliverytesttask.adapders
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.deliverytesttask.R
+import com.example.deliverytesttask.ui.create_order_fragment.CreateOrderFragment
 import kotlinx.android.synthetic.main.card_package_weight.view.*
 
 
-class PackageWeightsAdapter(var packageWeights: List<String>) :
+class PackageWeightsAdapter(
+    var context: CreateOrderFragment,
+    var packageWeights: List<String>) :
     RecyclerView.Adapter<PackageWeightsAdapter.ViewHolder>() {
 
     private var row_index = 0
@@ -27,6 +30,13 @@ class PackageWeightsAdapter(var packageWeights: List<String>) :
         viewHolder.view.setOnClickListener {
             row_index = id
             notifyDataSetChanged()
+            when (id) {
+                0 -> context.updateCost(0)
+                1 -> context.updateCost(100)
+                2 -> context.updateCost(200)
+                3 -> context.updateCost(300)
+            }
+
         }
 
         if (row_index == id) {

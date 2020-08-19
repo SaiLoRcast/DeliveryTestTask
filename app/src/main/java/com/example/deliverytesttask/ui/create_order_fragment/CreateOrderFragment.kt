@@ -14,13 +14,16 @@ import com.ethanhua.skeleton.ViewSkeletonScreen
 import com.example.core.domain.UsersData
 import com.example.deliverytesttask.R
 import com.example.deliverytesttask.framework.ViewModelFactory
-import com.example.deliverytesttask.presentation.mainscreen.PackageWeightsAdapter
+import com.example.deliverytesttask.adapders.PackageWeightsAdapter
 import kotlinx.android.synthetic.main.fragment_create_order.*
+
 
 class CreateOrderFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: PackageWeightsAdapter
     lateinit var skeletonScreen: ViewSkeletonScreen
+    var baseCost = 100
+    var additionalCost = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +45,17 @@ class CreateOrderFragment : Fragment() {
                 .navigate(R.id.action_createOrder_to_mainFragment)
         }
 
-        adapter = PackageWeightsAdapter(getWeightsList())
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+        next.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_createOrder_to_confirmOrderFragment)
+        }
+
+        adapter = PackageWeightsAdapter(
+            this,
+            getWeightsList()
+        )
+
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         package_weights_list.layoutManager = layoutManager
         package_weights_list.adapter = adapter
 
@@ -64,8 +76,23 @@ class CreateOrderFragment : Fragment() {
 
         skeletonScreen.hide()
 
+        updateCost(0)
+
+        express_delivery_switch.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if (isChecked) {
+                updateCost(50)
+            } else {
+                updateCost(0)
+            }
+        }
+
+
         val model: CreateNewOrderFragmentViewModel =
-            ViewModelProvider(this, ViewModelFactory).get(CreateNewOrderFragmentViewModel::class.java)
+            ViewModelProvider(
+                this,
+                ViewModelFactory
+            ).get(CreateNewOrderFragmentViewModel::class.java)
 
         model.loadUsersList()
 
@@ -74,6 +101,10 @@ class CreateOrderFragment : Fragment() {
 
             })
 
+    }
+
+    fun updateCost(additionalCost: Int) {
+        delivery_cost.text = String.format("%1s ₽", baseCost + additionalCost)
     }
 
 }

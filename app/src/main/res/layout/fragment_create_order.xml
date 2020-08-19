@@ -7,7 +7,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -154,29 +155,31 @@
                     android:textSize="14sp" />
 
                 <LinearLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/delivery_from_day"
-                        android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_calendar"
-                        android:layout_marginRight="16dp"
+                        android:padding="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/background_gray" />
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_gray"
+                        android:drawableLeft="@drawable/ic_calendar" />
 
                     <TextView
                         android:id="@+id/delivery_from_time"
-                        android:drawableLeft="@drawable/ic_clock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="12dp"
                         android:layout_weight="1"
-                        android:background="@drawable/background_gray" />
+                        android:background="@drawable/background_gray"
+                        android:drawableLeft="@drawable/ic_clock" />
 
                 </LinearLayout>
 
@@ -196,8 +199,120 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="21dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginBottom="21dp"
+                    android:background="@drawable/background_gray" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/background_white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/ic_2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Куда доставить"
+                        android:textColor="@color/textColor"
+                        android:textSize="23sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Адрес отправки"
+                    android:textColor="@color/textGrayColor"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/delivery_to_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/background_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="26dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Когда приехать на этот адрес"
+                    android:textColor="@color/textGrayColor"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/delivery_to_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:padding="12dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_gray"
+                        android:drawableLeft="@drawable/ic_calendar" />
+
+                    <TextView
+                        android:id="@+id/delivery_to_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_gray"
+                        android:drawableLeft="@drawable/ic_clock" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Комментарий курьеру"
+                    android:textColor="@color/textGrayColor"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/delivery_to_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="21dp"
                     android:background="@drawable/background_gray" />
 
             </LinearLayout>
@@ -207,6 +322,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -217,10 +333,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="23sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/next"
+            android:background="@drawable/next_button"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
