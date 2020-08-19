@@ -11,28 +11,31 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.ViewSkeletonScreen
-import com.example.core.domain.UsersData
+import com.example.core.domain.User
 import com.example.deliverytesttask.R
-import com.example.deliverytesttask.framework.ViewModelFactory
 import com.example.deliverytesttask.adapders.PackageWeightsAdapter
+import com.example.deliverytesttask.framework.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_confirm_order.*
 import kotlinx.android.synthetic.main.fragment_create_order.*
+import kotlinx.android.synthetic.main.fragment_create_order.next
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CreateOrderFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: PackageWeightsAdapter
-    lateinit var skeletonScreen: ViewSkeletonScreen
-    var baseCost = 100
-    var additionalCost = 0
+    private var baseCost = 100
+
+    var dateFormat: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+    var timeFormat: SimpleDateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+    var calendar: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        skeletonScreen = Skeleton.bind(container)
-            .load(R.layout.fragment_create_order)
-            .show()
 
         return inflater.inflate(R.layout.fragment_create_order, container, false)
     }
@@ -46,8 +49,16 @@ class CreateOrderFragment : Fragment() {
         }
 
         next.setOnClickListener {
+
+            val bundle = Bundle()
+            bundle.putString("from_address", delivery_from_address.text.toString())
+            bundle.putString("from_date", delivery_from_day.text.toString())
+            bundle.putString("to_address", delivery_to_address.text.toString())
+            bundle.putString("to_date", delivery_to_day.text.toString())
+            bundle.putString("delivery_cost", delivery_cost.text.toString())
+
             Navigation.findNavController(view)
-                .navigate(R.id.action_createOrder_to_confirmOrderFragment)
+                .navigate(R.id.action_createOrder_to_confirmOrderFragment, bundle)
         }
 
         adapter = PackageWeightsAdapter(
@@ -73,38 +84,86 @@ class CreateOrderFragment : Fragment() {
     }
 
     private fun initializeViews() {
+        val locationFrom = requireArguments().getSerializable("location_from") as User?
+        val locationTo = requireArguments().getSerializable("location_to") as User?
 
-        skeletonScreen.hide()
+        initAddressFrom(
+            locationFrom!!.location.country,
+            locationFrom.location.state,
+            locationFrom.location.city,
+            locationFrom.location.street
+        )
 
-        updateCost(0)
+        initAddressTo(
+            locationTo!!.location.country,
+            locationTo.location.state,
+            locationTo.location.city,
+            locationTo.location.street
+        )
+
+
+        initDateFrom()
+
+        initDateTo()
+        updateCost()
 
         express_delivery_switch.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if (isChecked) {
-                updateCost(50)
+                updateCost()
             } else {
-                updateCost(0)
+                updateCost()
             }
         }
 
-
-        val model: CreateNewOrderFragmentViewModel =
-            ViewModelProvider(
-                this,
-                ViewModelFactory
-            ).get(CreateNewOrderFragmentViewModel::class.java)
-
-        model.loadUsersList()
-
-        model.usersList.observe(viewLifecycleOwner,
-            Observer<UsersData> {
-
-            })
-
     }
 
-    fun updateCost(additionalCost: Int) {
-        delivery_cost.text = String.format("%1s ₽", baseCost + additionalCost)
+    private fun initAddressTo(country: String, state: String, city: String, street: String) {
+        delivery_to_address.text = String.format(
+            "%1s, %2s, %3s, %4s",
+            country,
+            state,
+            city,
+            street
+        )
+    }
+
+    private fun initAddressFrom(
+        country: String,
+        state: String,
+        city: String,
+        street: String
+    ) {
+        delivery_from_address.text = String.format(
+            "%1s, %2s, %3s, %4s",
+            country,
+            state,
+            city,
+            street
+        )
+    }
+
+    private fun initDateFrom() {
+        delivery_from_day.text = String.format(" %1s", dateFormat.format(calendar.time))
+    }
+
+    private fun initDateTo() {
+        val calendarTo: Calendar = calendar
+        calendarTo.add(Calendar.DAY_OF_YEAR, 1)
+        delivery_to_day.text = String.format(" %1s", dateFormat.format(calendarTo.time))
+    }
+
+    fun setBaseCost(additionalCost: Int) {
+        baseCost = additionalCost
+    }
+
+    fun updateCost() {
+        var express = 0
+        if (express_delivery_switch.isChecked) {
+            express = 50
+        }
+        delivery_cost.text = String.format("%1s ₽", baseCost + express)
+
     }
 
 }

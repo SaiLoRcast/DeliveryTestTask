@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import com.example.core.data.UserRepository
 import com.example.core.interactors.GetUserInfo
-import com.example.core.interactors.GetUsersList
+import com.example.core.interactors.GetUserLocation
 import com.example.deliverytesttask.framework.datasource.ApiUserDataSource
 import com.example.deliverytesttask.framework.datasource.RoomUserDataSource
 import com.example.deliverytesttask.framework.datasource.db.Interactors
@@ -24,7 +24,7 @@ class BaseApp : Application() {
         ViewModelFactory.inject(
             this, Interactors(
                 GetUserInfo(userRepository),
-                GetUsersList(userRepository)
+                GetUserLocation(userRepository)
             )
         )
 

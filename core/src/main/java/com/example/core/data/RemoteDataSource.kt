@@ -5,5 +5,6 @@ import com.example.core.domain.UsersData
 
 interface RemoteDataSource {
     suspend fun getUserInfo(): User
+    suspend fun getUserLocation(): User
     suspend fun getUsersList(): UsersData
 }

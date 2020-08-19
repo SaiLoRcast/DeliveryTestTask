@@ -16,11 +16,14 @@ import com.ethanhua.skeleton.ViewSkeletonScreen
 import com.example.core.domain.User
 import com.example.deliverytesttask.R
 import com.example.deliverytesttask.framework.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_create_order.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
     lateinit var skeletonScreen: ViewSkeletonScreen
+    lateinit var user: User
+    lateinit var userDeliveryTo: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +41,11 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         create_order_button.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("location_from", user)
+            bundle.putSerializable("location_to", userDeliveryTo)
             Navigation.findNavController(view)
-                .navigate(R.id.action_mainFragment_to_createOrderFragment)
+                .navigate(R.id.action_mainFragment_to_createOrderFragment,bundle)
         }
 
         initializeViews()
@@ -51,10 +57,16 @@ class MainFragment : Fragment() {
             ViewModelProvider(this, ViewModelFactory).get(MainFragmentViewModel::class.java)
 
         model.loadUserInfo()
+        model.loadUserDeliveryTo()
+
+        model.userDeliveryTo.observe(viewLifecycleOwner, Observer<User>{
+            userDeliveryTo = it
+        })
 
         model.userInfo.observe(viewLifecycleOwner,
             Observer<User> {
 
+                user = it
                 skeletonScreen.hide()
 
                 Glide.with(this) //1

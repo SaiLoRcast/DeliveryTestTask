@@ -9,6 +9,7 @@ class ApiUserDataSource : RemoteDataSource {
     private val api = API.getAPI()
 
     private lateinit var userInfo : User
+    private lateinit var userLocation : User
     private lateinit var usersData: UsersData
 
     override suspend fun getUserInfo(): User {
@@ -16,6 +17,13 @@ class ApiUserDataSource : RemoteDataSource {
             userInfo = it
         }
         return userInfo
+    }
+
+    override suspend fun getUserLocation(): User {
+        api.getUserInfo("lo2EC3eWZjn1kkHHS3CB","0P6E1d4nr0L1ntW8cjGU").execute().body()?.let {
+            userLocation = it
+        }
+        return userLocation
     }
 
     override suspend fun getUsersList(): UsersData {

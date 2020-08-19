@@ -14,7 +14,7 @@ data class User(
     val picture: String,
     val location: Location
 
-)
+) : java.io.Serializable
 
 data class Location(
 

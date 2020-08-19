@@ -20,17 +20,10 @@ import kotlinx.android.synthetic.main.fragment_create_order.*
 
 class ConfirmOrderFragment : Fragment() {
 
-    lateinit var skeletonScreen: ViewSkeletonScreen
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        skeletonScreen = Skeleton.bind(container)
-            .load(R.layout.fragment_confirm_order)
-            .show()
 
         return inflater.inflate(R.layout.fragment_confirm_order, container, false)
     }
@@ -39,8 +32,7 @@ class ConfirmOrderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         back.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_confirmOrder_to_createOrderFragment)
+            activity!!.onBackPressed()
         }
 
         initializeViews()
@@ -49,8 +41,11 @@ class ConfirmOrderFragment : Fragment() {
 
     private fun initializeViews() {
 
-        skeletonScreen.hide()
-
+        confirm_delivery_from_date.text = requireArguments().getString("from_date")
+        confirm_delivery_from_address.text = requireArguments().getString("from_address")
+        confirm_delivery_to_date.text = requireArguments().getString("to_date")
+        confirm_delivery_to_address.text = requireArguments().getString("to_address")
+        delivery_final_cost.text = requireArguments().getString("delivery_cost")
     }
 
 }

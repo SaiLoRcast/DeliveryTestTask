@@ -31,12 +31,12 @@ class PackageWeightsAdapter(
             row_index = id
             notifyDataSetChanged()
             when (id) {
-                0 -> context.updateCost(0)
-                1 -> context.updateCost(100)
-                2 -> context.updateCost(200)
-                3 -> context.updateCost(300)
+                0 -> context.setBaseCost(100)
+                1 -> context.setBaseCost(200)
+                2 -> context.setBaseCost(300)
+                3 -> context.setBaseCost(400)
             }
-
+            context.updateCost()
         }
 
         if (row_index == id) {

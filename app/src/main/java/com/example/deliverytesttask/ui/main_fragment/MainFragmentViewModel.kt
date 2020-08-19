@@ -15,11 +15,20 @@ class MainFragmentViewModel(application: Application, interactors: Interactors) 
     BaseViewModel(application, interactors) {
 
     val userInfo = MutableLiveData<User>()
+    val userDeliveryTo = MutableLiveData<User>()
 
     fun loadUserInfo() {
         viewModelScope.launch {
             withContext(Dispatchers.Default){
                 userInfo.postValue(interactors.getUserInfo())
+            }
+        }
+    }
+
+    fun loadUserDeliveryTo() {
+        viewModelScope.launch {
+            withContext(Dispatchers.Default){
+                userDeliveryTo.postValue(interactors.getUsersDeliveryTo())
             }
         }
     }
