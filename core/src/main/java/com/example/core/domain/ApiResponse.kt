@@ -24,7 +24,7 @@ data class Location(
     val country: String,
     val timezone: String
 
-)
+): java.io.Serializable
 
 data class UsersData(
     val data: List<User>

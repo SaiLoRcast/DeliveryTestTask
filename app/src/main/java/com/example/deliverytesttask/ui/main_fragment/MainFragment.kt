@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -16,8 +18,11 @@ import com.ethanhua.skeleton.ViewSkeletonScreen
 import com.example.core.domain.User
 import com.example.deliverytesttask.R
 import com.example.deliverytesttask.framework.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_create_order.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+
 
 class MainFragment : Fragment() {
 
@@ -40,13 +45,25 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        create_order_button.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putSerializable("location_from", user)
-            bundle.putSerializable("location_to", userDeliveryTo)
-            Navigation.findNavController(view)
-                .navigate(R.id.action_mainFragment_to_createOrderFragment,bundle)
+        lifecycleScope.launch {
+            val operation = async(Dispatchers.IO) {
+
+                while (!isDataLoaded()) {
+
+                }
+
+            }
+            operation.await()
+
+            create_order_button.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable("location_from", user)
+                bundle.putSerializable("location_to", userDeliveryTo)
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_mainFragment_to_createOrderFragment,bundle)
+            }
         }
+
 
         my_orders.setOnClickListener {
             Navigation.findNavController(view)
@@ -56,6 +73,19 @@ class MainFragment : Fragment() {
         initializeViews()
 
     }
+
+    private fun isDataLoaded(): Boolean {
+        if (this::user.isInitialized && this::userDeliveryTo.isInitialized) {
+
+            requireActivity().runOnUiThread {
+                skeletonScreen.hide()
+
+            }
+            return true
+        }
+        return false
+    }
+
 
     private fun initializeViews() {
         val model: MainFragmentViewModel =
@@ -72,8 +102,6 @@ class MainFragment : Fragment() {
             Observer<User> {
 
                 user = it
-                skeletonScreen.hide()
-
                 Glide.with(this) //1
                     .load(it.picture)
                     .skipMemoryCache(true) //2
