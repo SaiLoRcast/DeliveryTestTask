@@ -5,7 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.Order
 import com.example.core.domain.UsersData
+import com.example.core.interactors.GetMyOrders
+import com.example.core.interactors.GetUserInfo
+import com.example.core.interactors.GetUserLocation
 import com.example.deliverytesttask.framework.BaseViewModel
+import com.example.deliverytesttask.framework.ViewModelFactory
 import com.example.deliverytesttask.framework.datasource.db.Interactors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +21,7 @@ class MyOrdersFragmentViewModel(application: Application, interactors: Interacto
     val ordersList = MutableLiveData<List<Order>>()
 
     fun loadMyOrders() {
+
         viewModelScope.launch {
             withContext(Dispatchers.Default){
                 ordersList.postValue(interactors.getMyOrders())

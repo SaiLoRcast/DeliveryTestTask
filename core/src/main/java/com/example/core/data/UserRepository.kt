@@ -57,4 +57,8 @@ class UserRepository(
         return myOrdersList
     }
 
+    suspend fun saveMyOrders(orders: List<Order>)  {
+        localDataSource.saveMyOrder(orders)
+    }
+
 }

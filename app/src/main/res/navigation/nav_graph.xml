@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_mainFragment_to_createOrderFragment"
             app:destination="@id/createOrderFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_myOrdesrFragment"
+            app:destination="@id/myOrdersFragment" />
     </fragment>
 
     <fragment
@@ -33,5 +36,20 @@
         <action
             android:id="@+id/action_confirmOrder_to_createOrderFragment"
             app:destination="@id/createOrderFragment" />
+        <action
+            android:id="@+id/action_confirmOrder_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myOrdersFragment"
+        android:name="com.example.deliverytesttask.ui.my_orders.MyOrdersFragment"
+        tools:layout="@layout/fragment_my_orders">
+        <action
+            android:id="@+id/action_myOrdersFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_confirmOrder_to_createOrderFragment"-->
+<!--            app:destination="@id/createOrderFragment" />-->
     </fragment>
 </navigation>

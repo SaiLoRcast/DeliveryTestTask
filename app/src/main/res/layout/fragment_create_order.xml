@@ -178,6 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="12dp"
+                        android:text=" В любое время"
                         android:layout_weight="1"
                         android:background="@drawable/background_gray"
                         android:drawableLeft="@drawable/ic_clock" />
@@ -194,11 +195,15 @@
                     android:textColor="@color/textGrayColor"
                     android:textSize="14sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/delivery_from_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/textGrayColor"
+                    android:hint="Например: Звоните в домофон"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
@@ -281,19 +286,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:padding="12dp"
                         android:layout_weight="1"
                         android:background="@drawable/background_gray"
-                        android:drawableLeft="@drawable/ic_calendar" />
+                        android:drawableLeft="@drawable/ic_calendar"
+                        android:padding="12dp" />
 
                     <TextView
                         android:id="@+id/delivery_to_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="12dp"
+                        android:text=" В любое время"
                         android:layout_weight="1"
                         android:background="@drawable/background_gray"
-                        android:drawableLeft="@drawable/ic_clock" />
+                        android:drawableLeft="@drawable/ic_clock"
+                        android:padding="12dp" />
 
                 </LinearLayout>
 
@@ -307,10 +313,15 @@
                     android:textColor="@color/textGrayColor"
                     android:textSize="14sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/delivery_to_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/textGrayColor"
+                    android:hint="Например: Звоните в домофон"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"

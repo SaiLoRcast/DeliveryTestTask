@@ -23,6 +23,7 @@ import java.util.*
 
 
 class CreateOrderFragment : Fragment() {
+
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: PackageWeightsAdapter
     private var baseCost = 100

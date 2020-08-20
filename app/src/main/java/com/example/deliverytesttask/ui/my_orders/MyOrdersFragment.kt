@@ -18,9 +18,14 @@ import com.ethanhua.skeleton.ViewSkeletonScreen
 import com.example.core.domain.Order
 import com.example.core.domain.User
 import com.example.core.domain.UsersData
+import com.example.core.interactors.GetMyOrders
+import com.example.core.interactors.GetUserInfo
+import com.example.core.interactors.GetUserLocation
 import com.example.deliverytesttask.R
+import com.example.deliverytesttask.adapders.MyOrdersAdapter
 import com.example.deliverytesttask.framework.ViewModelFactory
 import com.example.deliverytesttask.adapders.PackageWeightsAdapter
+import com.example.deliverytesttask.framework.datasource.db.Interactors
 import com.example.deliverytesttask.ui.main_fragment.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_confirm_order.*
 import kotlinx.android.synthetic.main.fragment_create_order.*
@@ -28,6 +33,9 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_my_orders.*
 
 class MyOrdersFragment : Fragment() {
+
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var adapter: MyOrdersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +48,9 @@ class MyOrdersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        back.setOnClickListener {
-            requireActivity().onBackPressed()
+        back_to_main_view.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_myOrdersFragment_to_mainFragment)
         }
 
         initializeViews()
@@ -58,11 +67,18 @@ class MyOrdersFragment : Fragment() {
             Observer<List<Order>> {
 
                 if (it.isNotEmpty()) {
-                    Log.d("OLOLO", it[0].cost)
-                    test.text = it[0].cost
+                    adapter = MyOrdersAdapter(
+                        it
+                    )
+
+                    Log.d("OLOLO", it.size.toString())
+
+                    layoutManager = LinearLayoutManager(context)
+                    my_orders_list.layoutManager = layoutManager
+                    my_orders_list.adapter = adapter
 
                 } else {
-                    test.text = "kbcn gecn"
+                    test.text = "У Вас нет заказов"
                 }
 
             })
